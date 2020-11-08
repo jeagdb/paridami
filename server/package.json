@@ -1,0 +1,23 @@
+{
+  "name": "deal",
+  "version": "1.0.0",
+  "description": "application pour faire des paris entre amis !",
+  "main": "server.js",
+  "scripts": {
+    "test": "exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "paris",
+    "deals",
+    "friends",
+    "nodejs",
+    "socket.io"
+  ],
+  "author": "picou75",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.0.0"
+  }
+}
