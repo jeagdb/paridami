@@ -14,8 +14,7 @@ export default function Timer() {
     rejectUnauthorized: false
         }
     const socket = socketIOClient(ENDPOINT, options);
-    socket.on("FromAPI", data => {
-      console.log('from api :', data);
+    socket.on("timer", data => {
       setResponse(data);
     });
     return () => socket.disconnect();
