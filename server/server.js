@@ -3,10 +3,13 @@ const http = require("http");
 const socketIo = require("socket.io");
 
 const port = process.env.PORT || 4001;
-const index = require("./routes/index");
+
+const deal = require("./routes/deal");
+const authentication = require("./routes/authentication");
 
 const app = express();
-app.use(index);
+app.use('/deals', deal);
+app.use('/authentication', authentication);
 
 const server = http.createServer(app);
 
@@ -21,12 +24,10 @@ const io = socketIo(server, {
 let interval;
 const getApiAndEmit = socket => {
   const response = new Date();
-  console.log("here");
-  socket.emit("FromAPI", response);
+  socket.emit("timer", response);
 };
 
 io.on("connection", (socket) => {
-  console.log("here");
   if (interval) {
     clearInterval(interval);
   }
