@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormRoomCreation from './FormRoomCreation';
 import FormRoomConnexion from './FormRoomConnexion';
 
-export default function FormRoom() {
+export default function Room() {
   const [creationMode, setCreationMode] = useState(false);
 
   return (

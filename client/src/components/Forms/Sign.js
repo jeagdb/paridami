@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormSignUp from './FormSignUp';
 import FormSignIn from './FormSignIn';
 
-export default function FormRoom() {
+export default function Sign() {
   const [registerMode, setRegisterMode] = useState(false);
 
   return (
