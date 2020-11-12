@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
-import Input from '../Input';
+import Input from '../Commons/Input';
+import useAuth from '../../services/api-authentication';
 
 //Register
 export default function FormSignUp() {
@@ -7,6 +8,7 @@ export default function FormSignUp() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isNotificationShown, setIsNotificationShown] = useState(false);
+  const authenticationService = useAuth();
 
   const handleNameChange = useCallback((name) => setName(name), []);
   const handlePasswordChange = useCallback((password) => setPassword(password),[]);
@@ -17,8 +19,7 @@ export default function FormSignUp() {
       setIsNotificationShown(true);
       setError('Mot de passe trop court : minimum 5');
     } else {
-      //enregistrement
-      //connexion
+      authenticationService.signUp({ name, password });
     }
   };
 

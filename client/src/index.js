@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import './css/neumorph.css';
 import './css/index.css';
 import Poppin from './fonts/font';
-import App from './App';
+import App from './pages/App/App';
 
 
 ReactDOM.render(

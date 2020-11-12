@@ -10,7 +10,7 @@ export default function Header() {
         <div>
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <a className="nav-link" href="#">Rooms</a>
+              <a className="nav-link" href="#">Mes paridamis</a>
             </li>      
           </ul>
         </div>

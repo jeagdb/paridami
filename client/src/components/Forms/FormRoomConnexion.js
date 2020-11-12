@@ -1,22 +1,22 @@
 import React, { useState, useCallback } from "react";
-import Input from '../Input';
+import Input from '../Commons/Input';
 
-export default function FormRoomConnexion() {
+export default function FormDealConnexion() {
   const [name, setName] = useState('');
-  const [roomId, setRoomId] = useState('');
+  const [dealId, setDealId] = useState('');
   const [error, setError] = useState('');
   const [isNotificationShown, setIsNotificationShown] = useState(false);
 
   const handleNameChange = useCallback((name) => setName(name), []);
-  const handleRoomIdChange = useCallback((roomId) => setRoomId(roomId),[]);
-  const handlePostRoomConnexion = () => {
+  const handleDealIdChange = useCallback((dealId) => setDealId(dealId),[]);
+  const handlePostDealConnexion = () => {
     setIsNotificationShown(false);
-    if (roomId.length < 5) {
+    if (dealId.length < 5) {
       setIsNotificationShown(true);
-      setError('id de la room invalide.');
+      setError('id du pari invalide.');
     } else {
       console.log("name :", name);
-      console.log("roomId :", roomId);
+      console.log("dealId :", dealId);
       //connexion
     }
   };
@@ -25,18 +25,18 @@ export default function FormRoomConnexion() {
     <>
     <div className="d-flex">
       <div>
-      <h5 className="text-center">Rejoindre une room</h5>
+      <h5 className="text-center">Rejoindre un pari</h5>
         <div className="np-form-group">
           <label for="np-element">Nom</label>
             <Input className="np-form-element np-text-accent" placeholder="nom..." value={name} onChange={handleNameChange}/>
         </div>
         <div className="np-form-group">
-          <label for="np-element">Id de la room</label>
-          <Input className="np-form-element np-text-accent" placeholder="room id..." value={roomId} onChange={handleRoomIdChange}/>
+          <label for="np-element">Id du pari</label>
+          <Input className="np-form-element np-text-accent" placeholder="deal id..." value={dealId} onChange={handleDealIdChange}/>
           {isNotificationShown && (<div className="np-element np-text-warn">{error}</div>)}
         </div>
       </div>
-    <button type="submit" className="flex-grow-1 np-btn" onClick={handlePostRoomConnexion}>🚪🚶</button>
+    <button type="submit" className="flex-grow-1 np-btn" onClick={handlePostDealConnexion}>🚪🚶</button>
     </div>
     </>
   );
