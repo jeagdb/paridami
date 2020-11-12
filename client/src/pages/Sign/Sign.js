@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import FormSignUp from '../Forms/FormSignUp';
-import FormSignIn from '../Forms/FormSignIn';
+import FormSignUp from '../../components/Forms/FormSignUp';
+import FormSignIn from '../../components/Forms/FormSignIn';
 
 export default function Sign() {
   const [registerMode, setRegisterMode] = useState(false);

@@ -9,11 +9,11 @@ import '../../css/App.css';
 const NoRouteMatchPage = lazy(() => import('./NoRouteMatchPage'));
 const PrivateRoute = lazy(() => import('./PrivateRoute'));
 
-const HomePage = lazy(() => import('../pages/HomePage'));
+const HomePage = lazy(() => import('../HomePage'));
 
-const DealList = lazy(() => import('../pages/Deal/DealList'));
+const DealList = lazy(() => import('../Deal/DealList'));
 
-const Sign = lazy(() => import('../pages/Sign/Sign'));
+const Sign = lazy(() => import('../Sign/Sign'));
 const history = createBrowserHistory();
 
 function App() {

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Deal from '../components/Deal/Deal';
+import Deal from '../pages/Deal/Deal';
 
-export default HomePage = () => {
+export default function HomePage() {
     return (
       <>
         <Deal/>

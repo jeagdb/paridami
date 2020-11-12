@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import FormDealCreation from '../Forms/FormDealCreation';
-import FormDealConnexion from '../Forms/FormDealConnexion';
+import FormDealCreation from '../../components/Forms/FormDealCreation';
+import FormDealConnexion from '../../components/Forms/FormDealConnexion';
 
 export default function Deal() {
   const [creationMode, setCreationMode] = useState(false);
