@@ -1,6 +1,7 @@
 import './css/App.css';
 import Timer from './components/Timer';
 import FormRoom from './components/Forms/FormRoom';
+import FormSign from './components/Forms/FormSign';
 import Header from './components/Header';
 
 import React, { useState } from "react";
@@ -11,12 +12,7 @@ function App() {
     <>
       <Header/>
       <FormRoom/>
-      <div className="np-element np-hover mt-5">
-        <button className="np-btn" onClick={() => setLoadClient(prevState => !prevState)}>
-            STOP
-        </button>
-        {loadClient ? <Timer/> : null}
-      </div>
+      <FormSign/>
     </>
   );
 }

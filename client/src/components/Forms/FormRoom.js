@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import FormNewRoom from './FormNewRoom';
-import FormConnexionRoom from './FormConnexionRoom';
+import FormRoomCreation from './FormRoomCreation';
+import FormRoomConnexion from './FormRoomConnexion';
 
 export default function FormRoom() {
   const [creationMode, setCreationMode] = useState(false);
@@ -9,13 +9,13 @@ export default function FormRoom() {
     <div class="mt-5">
     {creationMode
     ? <>
-      <FormNewRoom/>
+      <FormRoomCreation/>
       <div>
         <button className="flex-grow-1 np-btn np-text-accent" onClick={() => { setCreationMode(!creationMode) }}>Rejoindre une room</button>
       </div>
     </>
     : <>
-      <FormConnexionRoom/>
+      <FormRoomConnexion/>
       <div>
         <button className="flex-grow-1 np-btn np-text-accent" onClick={() => setCreationMode(!creationMode)}>Créer une room</button>
       </div>

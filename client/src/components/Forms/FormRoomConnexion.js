@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Input from '../Input';
 
-export default function FormConnexionRoom() {
+export default function FormRoomConnexion() {
   const [name, setName] = useState('');
   const [roomId, setRoomId] = useState('');
   const [error, setError] = useState('');
