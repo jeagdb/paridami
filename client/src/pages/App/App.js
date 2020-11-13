@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { Router, Switch, Route } from 'react-router-dom';
+import {  BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import Header from '../../components/Commons/Header';
 import { AuthContextProvider } from '../../services/api-authentication';
