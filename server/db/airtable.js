@@ -5,7 +5,7 @@ const base = airtable.base('tblsjFlgR7FVpzxL6');
 //const dealTable = base("Deal");
 //const userDealTable = base("UserDeal");
 
-export const getDealsFromUser = (userId) => {
+const getDealsFromUser = (userId) => {
     const userDealTable = base("UserDeal");
     const all = userDealTable.select({ view: "userDealView" });
     const listDealIdByUserId = all.firstPage((err, records) => {
@@ -22,4 +22,6 @@ export const getDealsFromUser = (userId) => {
         return res;
     })
     return { userDeals, listDealIdByUserId };
-}
+};
+
+module.exports = { getDealsFromUser };

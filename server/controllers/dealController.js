@@ -1,7 +1,7 @@
-const { getDealFromUser } = require('../db/airtable');
+const { getDealsFromUser } = require('../db/airtable');
 const { DealModel } = require('../models/dealModel');
 
-export function getUserDeals(userId) {
+const getUserDeals = (userId) => {
     const res = getDealsFromUser(userId);
 
     let deals = new Array();
@@ -10,4 +10,6 @@ export function getUserDeals(userId) {
         deals.push(newDeal);
     });
     return deals;
-}
+};
+
+module.exports = { getUserDeals };

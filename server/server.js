@@ -1,15 +1,18 @@
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
-
 const port = process.env.PORT || 4001;
-
 const deal = require("./routes/deal");
 const authentication = require("./routes/authentication");
-
+const cors = require("cors");
 const app = express();
+
+//body-parser
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors());
 app.use('/deals', deal);
-app.use('/authentication', authentication);
+app.use('/auth', authentication);
 
 const server = http.createServer(app);
 

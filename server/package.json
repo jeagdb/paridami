@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "exit 1",
-    "start": "node -r dotenv/config server.js"
+    "start": "nodemon -r dotenv/config server.js"
   },
   "keywords": [
     "paris",
@@ -20,6 +20,10 @@
     "airtable": "^0.10.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-validator": "^6.6.1",
+    "jsonwebtoken": "^8.5.1",
+    "passport": "^0.4.1",
+    "passport-json": "^1.2.0",
     "socket.io": "^3.0.0"
   }
 }
