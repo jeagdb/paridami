@@ -12,13 +12,13 @@ export default function Sign() {
     ? <>
       <FormSignUp/>
       <div>
-        <button className="flex-grow-1 np-btn np-text-accent" onClick={() => { setRegisterMode(!registerMode) }}>Se connecter</button>
+        <button className="flex-grow-1 np-btn np-text-accent font-italic" onClick={() => { setRegisterMode(!registerMode) }}>Se connecter ?</button>
       </div>
     </>
     : <>
       <FormSignIn/>
       <div>
-        <button className="flex-grow-1 np-btn np-text-accent" onClick={() => setRegisterMode(!registerMode)}>S'inscrire</button>
+        <button className="flex-grow-1 np-btn np-text-accent font-italic" onClick={() => setRegisterMode(!registerMode)}>S'inscrire ?</button>
       </div>
     </>
     }

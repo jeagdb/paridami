@@ -33,7 +33,7 @@ function FormSignUp() {
         </div>
         <div className="np-form-group">
           <label>Mot de passe</label>
-          <Input className="np-form-element np-text-accent" placeholder="mot de passe... (> 5)" value={password} onChange={handlePasswordChange}/>
+          <Input type="password" className="np-form-element np-text-accent" placeholder="mot de passe... (> 5)" value={password} onChange={handlePasswordChange}/>
           {isNotificationShown && (<div className="np-element np-text-warn">{error}</div>)}
         </div>
       </div>
