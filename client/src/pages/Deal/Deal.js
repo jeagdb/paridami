@@ -6,7 +6,7 @@ export default function Deal() {
   const [creationMode, setCreationMode] = useState(false);
 
   return (
-    <div class="mt-5">
+    <div className="mt-5">
     {creationMode
     ? <>
       <FormDealCreation/>

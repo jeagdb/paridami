@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Input from '../Commons/Input';
 
-export default function FormDealCreation() {
+function FormDealCreation() {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [isNotificationShown, setIsNotificationShown] = useState(false);
@@ -23,7 +23,7 @@ export default function FormDealCreation() {
       <div>
         <h5 className="text-center">Créer un pari</h5>
         <div className="np-form-group">
-        <label for="np-element">Nom du pari</label>
+        <label>Nom du pari</label>
           <Input className="np-form-element np-text-accent" placeholder="nom..." value={name} onChange={handleNameChange}/>
           {isNotificationShown && (<div className="np-element np-text-warn">{error}</div>)}
           </div>
@@ -33,3 +33,5 @@ export default function FormDealCreation() {
     </>
   );
 }
+
+export default FormDealCreation;

@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Input from '../Commons/Input';
 
-export default function FormDealConnexion() {
+function FormDealConnexion() {
   const [name, setName] = useState('');
   const [dealId, setDealId] = useState('');
   const [error, setError] = useState('');
@@ -27,11 +27,11 @@ export default function FormDealConnexion() {
       <div>
       <h5 className="text-center">Rejoindre un pari</h5>
         <div className="np-form-group">
-          <label for="np-element">Nom</label>
+          <label>Nom</label>
             <Input className="np-form-element np-text-accent" placeholder="nom..." value={name} onChange={handleNameChange}/>
         </div>
         <div className="np-form-group">
-          <label for="np-element">Id du pari</label>
+          <label>Id du pari</label>
           <Input className="np-form-element np-text-accent" placeholder="deal id..." value={dealId} onChange={handleDealIdChange}/>
           {isNotificationShown && (<div className="np-element np-text-warn">{error}</div>)}
         </div>
@@ -41,3 +41,5 @@ export default function FormDealConnexion() {
     </>
   );
 }
+
+export default FormDealConnexion;

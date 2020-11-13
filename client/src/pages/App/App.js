@@ -3,6 +3,7 @@ import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import Header from '../../components/Commons/Header';
 import { AuthContextProvider } from '../../services/api-authentication';
+import Poppin from '../../fonts/font';
 
 import '../../css/App.css';
 
@@ -20,26 +21,16 @@ function App() {
   return (
     <Router history={history}>
       <Suspense fallback={<div>loading...</div>}>
+        <AuthContextProvider>
+          <Poppin/>
+          <Header/>
           <Switch>
-          <AuthContextProvider>
-            <Header/>
-            <Route path="/auth/sign">
-              <Sign/>
-            </Route>
-            <Route>
-              <PrivateRoute path="/">
-                <HomePage />
-              </PrivateRoute>
-              <NoRouteMatchPage />
-            </Route>
-            <Route>
-              <PrivateRoute path="/deals">
-                <DealList />
-              </PrivateRoute>
-              <NoRouteMatchPage />
-            </Route>
-            </AuthContextProvider>
+              <Route path="/auth/sign" component={Sign}/>
+              <PrivateRoute exact path="/" component={HomePage}/>
+              <PrivateRoute path="/deals" component={DealList}/>
+              <Route component={NoRouteMatchPage}/>
           </Switch>
+        </AuthContextProvider>
       </Suspense>
     </Router>
   );

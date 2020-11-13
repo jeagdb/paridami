@@ -3,7 +3,7 @@ import Input from '../Commons/Input';
 import useAuth from '../../services/api-authentication';
 
 //Login
-export default function FormSignIn() {
+function FormSignIn() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -29,12 +29,12 @@ export default function FormSignIn() {
       <div>
       <h5 className="text-center">Se connecter</h5>
         <div className="np-form-group">
-          <label for="np-element">Nom</label>
+          <label>Nom</label>
             <Input className="np-form-element np-text-accent" placeholder="nom..." value={name} onChange={handleNameChange}/>
         </div>
         <div className="np-form-group">
-          <label for="np-element">Mot de passe</label>
-          <Input className="np-form-element np-text-accent" placeholder="mot de passe..." value={password} onChange={handlePasswordChange}/>
+          <label>Mot de passe</label>
+            <Input className="np-form-element np-text-accent" placeholder="mot de passe..." value={password} onChange={handlePasswordChange}/>
           {isNotificationShown && (<div className="np-element np-text-warn">{error}</div>)}
         </div>
       </div>
@@ -43,3 +43,5 @@ export default function FormSignIn() {
     </>
   );
 }
+
+export default FormSignIn;

@@ -3,10 +3,11 @@ import FormSignUp from '../../components/Forms/FormSignUp';
 import FormSignIn from '../../components/Forms/FormSignIn';
 
 export default function Sign() {
+  console.log("HERE");
   const [registerMode, setRegisterMode] = useState(false);
 
   return (
-    <div class="mt-5">
+    <div className="mt-5">
     {registerMode
     ? <>
       <FormSignUp/>

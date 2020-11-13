@@ -2,8 +2,7 @@ import React, { useState, useCallback } from "react";
 import Input from '../Commons/Input';
 import useAuth from '../../services/api-authentication';
 
-//Register
-export default function FormSignUp() {
+function FormSignUp() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -29,11 +28,11 @@ export default function FormSignUp() {
       <div>
       <h5 className="text-center">S'inscrire</h5>
         <div className="np-form-group">
-          <label for="np-element">Nom</label>
-            <Input className="np-form-element np-text-accent" placeholder="nom..." value={name} onChange={handleNameChange}/>
+          <label>Nom</label>
+          <Input className="np-form-element np-text-accent" placeholder="nom..." value={name} onChange={handleNameChange}/>
         </div>
         <div className="np-form-group">
-          <label for="np-element">Mot de passe</label>
+          <label>Mot de passe</label>
           <Input className="np-form-element np-text-accent" placeholder="mot de passe... (> 5)" value={password} onChange={handlePasswordChange}/>
           {isNotificationShown && (<div className="np-element np-text-warn">{error}</div>)}
         </div>
@@ -43,3 +42,5 @@ export default function FormSignUp() {
     </>
   );
 }
+
+export default FormSignUp;
