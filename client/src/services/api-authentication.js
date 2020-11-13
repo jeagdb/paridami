@@ -114,13 +114,20 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(AuthReducer, initialState);
   const checkToken = () => {
     const token = localStorage.getItem('token');
-    if (token != 'null') {
-      const expirationTime = jwt_decode(token).exp;
+    console.log('token :', token);
+    let expirationTime = 0;
+    if (token && token !== 'null') {
+      try {
+        expirationTime = jwt_decode(token).exp;
+      }
+      catch(err) {
+        console.log('api-authentication [err token]: ', err);
+      }
       const now = Date.now().valueOf() / 1000;
       if (expirationTime < now) {
         dispatch({ type: 'SIGN_OUT' });
       }
-      if (localStorage.getItem('token') != 'null' && state.isSignedIn === false) {
+      if (localStorage.getItem('token') !== 'null' && state.isSignedIn === false) {
         dispatch({ type: 'SIGN_IN', token: localStorage.getItem('token') });
       }
     }
