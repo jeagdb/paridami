@@ -1,10 +1,13 @@
 const jwt = require('jsonwebtoken');
 
-const onAuthenticated = () => (err, user) => {
+function handleResponse(res, code, statusMsg) {
+  res.status(code).json(statusMsg);
+}
+
+const onAuthenticated = (req, res, next) => (err, user) => {
   if (err) {
-    return null;
+    return handleResponse(res, 401, { errors: [err] });
   }
-  
   if (user) {
     const tokenContents = {
       sub: user.id,
@@ -12,8 +15,9 @@ const onAuthenticated = () => (err, user) => {
       iat: Date.now() / 1000,
       exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60
     };
-
-    return jwt.sign(tokenContents, process.env.ENCRYPTION_KEY);
+    handleResponse(res, 200, {
+      token: jwt.sign(tokenContents, process.env.ENCRYPTION_KEY)
+    });
   }
 };
 module.exports = { onAuthenticated };

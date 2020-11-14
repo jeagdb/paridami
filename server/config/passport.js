@@ -1,5 +1,6 @@
 const passport = require('passport');
 const { Strategy: JsonStrategy } = require('passport-json');
+const { findUserByUserName } = require('../db/airtable');
 
 passport.use(
   new JsonStrategy(
@@ -7,11 +8,16 @@ passport.use(
       usernameProp: 'name',
       passwordProp: 'password'
     },
-    (username, password, done) => {
-      //check si le user existe puis check le mdp avec airtable
-      console.log("username: ", username);
-      console.log("password: ", password);
-      return done(null, user);
+    async (username, password, done) => {
+      console.log(username, password);
+      const user = await findUserByUserName(username);
+      if (!user || user === undefined)
+        return done('Unknown user');
+
+      if (user.fields.Password !== password)
+        return done('Invalid password');
+
+      return done(null, user.fields);
     }
   )
 );

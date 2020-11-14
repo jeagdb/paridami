@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('../config/passport');
 const { onAuthenticated } = require('../services/authentication');
 const { check, validationResult } = require('express-validator');
+const { addUser } = require('../db/airtable');
 
 router.get("/signout", (req, res) => {
   req.logOut();
@@ -16,33 +17,29 @@ router.post("/signin", [
   if (!errors.isEmpty()) {
     return res.send({ errors: errors.array() }).status(401);
   }
-  const token = passport.authenticate('json', onAuthenticated())(
+  passport.authenticate('json', onAuthenticated(req, res, next))(
     req,
     res,
     next
   );
-  if (token) {
-    res.send({ token }).status(200);
-  } else
-    res.send({ errors: "error signin !"}).status(401);
 });
   
 router.post("/signup", [
   check('password').isLength({ min: 5 })
-], (req, res, next) => {
+], async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.send({ errors: errors.array() }).status(401);
   }
-  const token = passport.authenticate('json', onAuthenticated())(
+  const isAdd = await addUser(req.body.name, req.body.password);
+  if (!isAdd) {
+    return res.send({ errors: 'authentication route : signUp [err]: addUser error' }).status(401);
+  }
+  passport.authenticate('json', onAuthenticated())(
     req,
     res,
     next
   );
-  if (token) {
-    res.send({ token }).status(200);
-  } else
-    res.send({ errors: "error signUp !"}).status(401);
 })
 
 module.exports = router;
