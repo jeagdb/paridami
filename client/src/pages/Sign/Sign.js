@@ -3,7 +3,6 @@ import FormSignUp from '../../components/Forms/FormSignUp';
 import FormSignIn from '../../components/Forms/FormSignIn';
 
 export default function Sign() {
-  console.log("HERE");
   const [registerMode, setRegisterMode] = useState(false);
 
   return (

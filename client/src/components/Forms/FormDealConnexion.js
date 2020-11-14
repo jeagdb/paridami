@@ -15,8 +15,6 @@ function FormDealConnexion() {
       setIsNotificationShown(true);
       setError('id du pari invalide.');
     } else {
-      console.log("name :", name);
-      console.log("dealId :", dealId);
       //connexion
     }
   };

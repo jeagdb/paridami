@@ -12,7 +12,6 @@ function FormDealCreation() {
       setIsNotificationShown(true);
       setError('Nom du pari invalide.');
     } else {
-      console.log("name :", name);
       //creation + connexion
     }
   }
