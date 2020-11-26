@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 function handleResponse(res, code, statusMsg) {
   res.status(code).json(statusMsg);
@@ -8,6 +9,7 @@ const onAuthenticated = (req, res, next) => (err, user) => {
   if (err) {
     return handleResponse(res, 401, { errors: [err] });
   }
+  console.log('in the boucle :', res);
   if (user) {
     const tokenContents = {
       sub: user.id,
@@ -20,4 +22,32 @@ const onAuthenticated = (req, res, next) => (err, user) => {
     });
   }
 };
-module.exports = { onAuthenticated };
+
+const checkCredentials =  async (inputPwd, dbPwd) => {
+  return await bcrypt.compare(inputPwd, dbPwd)
+    .then(res => {
+      console.log('is good :', res);
+      return res;
+    })
+    .catch(err => {
+      console.error("checkCredentials: ", err)
+      return false;
+    })
+}
+
+const hashPassword = async (cypherPassword) => {
+  return await bcrypt.hash(cypherPassword, 10)
+    .then(res => {
+      return res;
+    })
+    .catch(err => {
+      console.error("hashPassword : [err] : ", err);
+      return null;
+    })
+}
+
+module.exports = { 
+  onAuthenticated,
+  hashPassword,
+  checkCredentials
+};

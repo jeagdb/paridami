@@ -1,6 +1,7 @@
 const passport = require('passport');
 const { Strategy: JsonStrategy } = require('passport-json');
-const { findUserByUserName } = require('../db/airtable');
+const { findUserByUserName, getUserById } = require('../db/userQueries');
+const { checkCredentials } = require('../services/authentication');
 
 passport.use(
   new JsonStrategy(
@@ -9,15 +10,17 @@ passport.use(
       passwordProp: 'password'
     },
     async (username, password, done) => {
-      console.log(username, password);
       const user = await findUserByUserName(username);
       if (!user || user === undefined)
         return done('Unknown user');
 
-      if (user.fields.Password !== password)
+      console.log('jere');
+      const isValidCredentials = await checkCredentials(password, user.password);
+      if (!isValidCredentials)
         return done('Invalid password');
 
-      return done(null, user.fields);
+      console.log("lets go the next etape")
+      return done(null, user);
     }
   )
 );
@@ -27,11 +30,10 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
+passport.deserializeUser(async (id, done) => {
   console.log('Inside deserializeUser callback');
   console.log(`The user id passport saved in the session file store is: ${id}`);
-  //const user = GetUserWithId(id);
-  user = null;
+  const user = await GetUserById(id);
   done(null, user);
 });
 

@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const passport = require('../config/passport');
-const { onAuthenticated } = require('../services/authentication');
+const { onAuthenticated, hashPassword, checkCredentials } = require('../services/authentication');
 const { check, validationResult } = require('express-validator');
-const { addUser } = require('../db/airtable');
+const { addUser } = require('../db/userQueries');
 
 router.get("/signout", (req, res) => {
   req.logOut();
@@ -16,6 +16,10 @@ router.post("/signin", [
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.send({ errors: errors.array() }).status(401);
+  }
+  const isValidCredentials = checkCredentials(req.body.name, req.body.password);
+  if (!isValidCredentials) {
+    return res.send({ errors: 'Wrong credentials...'})
   }
   passport.authenticate('json', onAuthenticated(req, res, next))(
     req,
@@ -31,11 +35,12 @@ router.post("/signup", [
   if (!errors.isEmpty()) {
     return res.send({ errors: errors.array() }).status(401);
   }
-  const isAdd = await addUser(req.body.name, req.body.password);
+  const hashPwd = await hashPassword(req.body.password);
+  const isAdd = await addUser(req.body.name, hashPwd);
   if (!isAdd) {
     return res.send({ errors: 'authentication route : signUp [err]: addUser error' }).status(401);
   }
-  passport.authenticate('json', onAuthenticated())(
+  passport.authenticate('json', onAuthenticated(req, res, next))(
     req,
     res,
     next
