@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import Input from '../Commons/Input';
 import useAuth from '../../services/api-authentication';
 import { encrypt } from '../../services/encryption';
+import history from '../../pages/App/History';
 
 function FormSignIn() {
   const [name, setName] = useState('');
@@ -21,6 +22,7 @@ function FormSignIn() {
     } else {
       const cipherPassword = encrypt(password);
       authenticationService.signIn({ name, cipherPassword });
+      history.push('/');
     }
   };
 

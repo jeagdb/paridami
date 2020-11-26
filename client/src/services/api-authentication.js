@@ -1,17 +1,18 @@
 import React from 'react';
-import { API_AUTHENTICATION_ENDPOINT_HTTP } from '../config';
 import jwt_decode from 'jwt-decode';
 
+const API_AUTHENTICATION_ENDPOINT_HTTP = 'http://localhost:4001';
+
 const authAPISignUp = async (name, password, dispatch) => {
-  return fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/signup', {
+  return await fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/signup', {
     method: 'POST',
     body: JSON.stringify({ name, password }),
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then((res) => {
-      const jsonRes = res.json();
-      if (jsonRes.token) {
+  }).then(async (res) => {
+      const jsonRes = await res.json();
+      if (jsonRes && jsonRes.token) {
         dispatch({ type: 'SIGN_UP', token: jsonRes.token });
       } else {
         dispatch({ type: 'ERROR_SIGN_UP', token: jsonRes.errors })
@@ -23,8 +24,8 @@ const authAPISignUp = async (name, password, dispatch) => {
   );
 };
 
-const authAPISignIn = (name, password, dispatch) => {
-  fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/signin', {
+const authAPISignIn = async (name, password, dispatch) => {
+  await fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/signin', {
     method: 'POST',
     body: JSON.stringify({ name, password }),
     headers: {
@@ -41,8 +42,8 @@ const authAPISignIn = (name, password, dispatch) => {
   );
 };
 
-const authAPISignOut = (dispatch) => {
-  fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/logout', {
+const authAPISignOut = async (dispatch) => {
+  await fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/logout', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -134,15 +135,14 @@ export const AuthContextProvider = ({ children }) => {
 
   }
   checkToken();
-  const signIn = React.useCallback(({ name, password }) => {
-    authAPISignIn(name, password, dispatch);
+  const signIn = React.useCallback( async ({ name, password }) => {
+    await authAPISignIn(name, password, dispatch);
   });
-  const signUp = React.useCallback(({ name, password }) => {
-    console.log('signup :', password);
-    authAPISignUp(name, password, dispatch);
+  const signUp = React.useCallback( async ({ name, password }) => {
+    await authAPISignUp(name, password, dispatch);
   });
-  const signOut = () => {
-    authAPISignOut(dispatch);
+  const signOut = async () => {
+    await authAPISignOut(dispatch);
   }
   return (
     <AuthContext.Provider

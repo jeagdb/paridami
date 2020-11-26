@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import {  BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import history from './History';
 import Header from '../../components/Commons/Header';
 import { AuthContextProvider } from '../../services/api-authentication';
 import Poppin from '../../fonts/font';
@@ -15,7 +15,6 @@ const HomePage = lazy(() => import('../HomePage'));
 const DealList = lazy(() => import('../Deal/DealList'));
 
 const Sign = lazy(() => import('../Sign/Sign'));
-const history = createBrowserHistory();
 
 function App() {
   return (
