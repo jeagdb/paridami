@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from "react";
 import Input from '../Commons/Input';
 import useAuth from '../../services/api-authentication';
+import { encrypt } from '../../services/encryption';
 
-//Login
 function FormSignIn() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +19,8 @@ function FormSignIn() {
       setIsNotificationShown(true);
       setError('Mot de passe incorrect.');
     } else {
-      authenticationService.signIn({ name, password });
+      const cipherPassword = encrypt(password);
+      authenticationService.signIn({ name, cipherPassword });
     }
   };
 

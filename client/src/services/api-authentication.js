@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 const authAPISignUp = async (name, password, dispatch) => {
   return fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/signup', {
     method: 'POST',
-    body: JSON.stringify({ name: name, password: password }),
+    body: JSON.stringify({ name, password }),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -26,7 +26,7 @@ const authAPISignUp = async (name, password, dispatch) => {
 const authAPISignIn = (name, password, dispatch) => {
   fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/signin', {
     method: 'POST',
-    body: JSON.stringify({ name: name, password: password }),
+    body: JSON.stringify({ name, password }),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -138,6 +138,7 @@ export const AuthContextProvider = ({ children }) => {
     authAPISignIn(name, password, dispatch);
   });
   const signUp = React.useCallback(({ name, password }) => {
+    console.log('signup :', password);
     authAPISignUp(name, password, dispatch);
   });
   const signOut = () => {
