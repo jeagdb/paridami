@@ -14,12 +14,9 @@ passport.use(
       if (!user || user === undefined)
         return done('Unknown user');
 
-      console.log('jere');
       const isValidCredentials = await checkCredentials(password, user.password);
       if (!isValidCredentials)
         return done('Invalid password');
-
-      console.log("lets go the next etape")
       return done(null, user);
     }
   )

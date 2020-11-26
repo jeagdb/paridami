@@ -9,7 +9,6 @@ const onAuthenticated = (req, res, next) => (err, user) => {
   if (err) {
     return handleResponse(res, 401, { errors: [err] });
   }
-  console.log('in the boucle :', res);
   if (user) {
     const tokenContents = {
       sub: user.id,
@@ -26,7 +25,6 @@ const onAuthenticated = (req, res, next) => (err, user) => {
 const checkCredentials =  async (inputPwd, dbPwd) => {
   return await bcrypt.compare(inputPwd, dbPwd)
     .then(res => {
-      console.log('is good :', res);
       return res;
     })
     .catch(err => {
