@@ -21,7 +21,7 @@ function FormSignIn() {
       setError('Mot de passe incorrect.');
     } else {
       const cipherPassword = encrypt(password);
-      authenticationService.signIn({ name, cipherPassword });
+      authenticationService.signIn({ name: name, password: cipherPassword });
       history.push('/');
     }
   };
