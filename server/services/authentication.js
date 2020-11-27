@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const AES = require("crypto-js/aes");
 
 function handleResponse(res, code, statusMsg) {
   res.status(code).json(statusMsg);
@@ -23,7 +24,9 @@ const onAuthenticated = (req, res, next) => (err, user) => {
 };
 
 const checkCredentials =  async (inputPwd, dbPwd) => {
-  return await bcrypt.compare(inputPwd, dbPwd)
+  const pwd = AES.decrypt(inputPwd, process.env.SECRET_KEY).toString();
+  console.log('pwd', pwd);
+  return await bcrypt.compare(pwd, dbPwd)
     .then(res => {
       return res;
     })
@@ -34,7 +37,8 @@ const checkCredentials =  async (inputPwd, dbPwd) => {
 }
 
 const hashPassword = async (cypherPassword) => {
-  return await bcrypt.hash(cypherPassword, 10)
+  const pwd = AES.decrypt(cypherPassword, process.env.SECRET_KEY).toString();
+  return await bcrypt.hash(pwd, 10)
     .then(res => {
       return res;
     })
