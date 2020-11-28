@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode';
 const API_AUTHENTICATION_ENDPOINT_HTTP = 'http://localhost:4001';
 
 const authAPISignUp = async (name, password, dispatch) => {
-  return await fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/signup', {
+  await fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/signup', {
     method: 'POST',
     body: JSON.stringify({ name, password }),
     headers: {
@@ -12,11 +12,7 @@ const authAPISignUp = async (name, password, dispatch) => {
     },
   }).then(async (res) => {
       const jsonRes = await res.json();
-      if (jsonRes && jsonRes.token) {
-        dispatch({ type: 'SIGN_UP', token: jsonRes.token });
-      } else {
-        dispatch({ type: 'ERROR_SIGN_UP', token: jsonRes.errors })
-      }
+      dispatch({ type: 'SIGN_UP', token: jsonRes.token });
     },
     (err) => {
       console.log('authAPISignUp [err]: ', err);
@@ -70,6 +66,7 @@ const AuthContext = React.createContext({
 const AuthReducer = (state, action) => {
   switch (action.type) {
     case 'SIGN_UP':
+      console.log("here ", action.token);
       localStorage.setItem('token', action.token)
       return {
         ...state,
@@ -115,7 +112,7 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(AuthReducer, initialState);
   const checkToken = () => {
     const token = localStorage.getItem('token');
-    console.log('token :', token);
+    console.log(token);
     let expirationTime = 0;
     if (token && token !== 'null') {
       try {

@@ -22,7 +22,8 @@ function FormSignUp() {
     } else {
       const cipherPassword = encrypt(password);
       authenticationService.signUp({ name: name, password: cipherPassword });
-      history.push('/');
+      history.replace('/');
+      window.location.reload();
     }
   };
 
