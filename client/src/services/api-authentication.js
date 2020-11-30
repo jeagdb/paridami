@@ -39,7 +39,7 @@ const authAPISignIn = async (name, password, dispatch) => {
 };
 
 const authAPISignOut = async (dispatch) => {
-  await fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/logout', {
+  await fetch(API_AUTHENTICATION_ENDPOINT_HTTP + '/auth/signout', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -112,7 +112,6 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(AuthReducer, initialState);
   const checkToken = () => {
     const token = localStorage.getItem('token');
-    console.log(token);
     let expirationTime = 0;
     if (token && token !== 'null') {
       try {

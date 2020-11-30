@@ -23,7 +23,7 @@ function FormSignUp() {
       const cipherPassword = encrypt(password);
       authenticationService.signUp({ name: name, password: cipherPassword });
       history.replace('/');
-      window.location.reload();
+      //window.location.reload();
     }
   };
 
